@@ -3,7 +3,6 @@ package com.group5.dams.controller;
 import com.group5.dams.model.Dog;
 import com.group5.dams.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

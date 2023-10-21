@@ -1,12 +1,10 @@
 package com.group5.dams.service;
 
 import com.group5.dams.model.Dog;
-import com.group5.dams.model.Person;
 import com.group5.dams.repository.DogRepository;
 import com.group5.dams.repository.PendingAdoptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 

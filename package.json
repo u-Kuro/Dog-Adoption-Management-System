@@ -2,11 +2,11 @@
   "name": "dog-adoption-management-system",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "concurrently \"npm run ng:serve\" \"npm run spring-boot\"",
+    "ng:serve": "ng serve",
+    "ng:build": "ng build",
+    "ng:test": "ng test",
+    "spring-boot": "cd springboot && mvn spring-boot:run -X"
   },
   "private": true,
   "dependencies": {
@@ -18,7 +18,6 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-    "concurrently": "^8.2.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

@@ -3,7 +3,6 @@ package com.group5.dams.controller;
 import com.group5.dams.model.Person;
 import com.group5.dams.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

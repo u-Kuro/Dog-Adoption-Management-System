@@ -1,7 +1,5 @@
 package com.group5.dams.repository;
 
-import com.group5.dams.model.Admin;
-import com.group5.dams.model.Dog;
 import com.group5.dams.model.PendingAdoption;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

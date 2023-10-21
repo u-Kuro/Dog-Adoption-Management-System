@@ -18,7 +18,7 @@ public class DogController {
     @RequestMapping("/api/dogs")
     public List<Dog> showDogs(){ return dogService.getDogs(); }
 
-    @RequestMapping(value = "/api/show-dog/{id}")
+    @RequestMapping(value = "/api/dog/{id}")
     public Dog showDog(@PathVariable long id) throws Exception {
         return dogService.getDog(id);
     }

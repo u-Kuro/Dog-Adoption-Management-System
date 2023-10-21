@@ -15,24 +15,32 @@ public class DogController {
     @Autowired
     private DogService dogService;
 
+    @RequestMapping(value = "/api/is-dog-available/{id}")
+    public boolean isDogAvailable(@PathVariable long id) {
+        return dogService.isDogAvailable(id);
+    }
+
+    @RequestMapping("/api/available-dogs")
+    public List<Dog> showAvailableDogs(){ return dogService.getAvailableDogs(); }
+
     @RequestMapping("/api/dogs")
     public List<Dog> showDogs(){ return dogService.getDogs(); }
 
     @RequestMapping(value = "/api/dog/{id}")
-    public Dog showDog(@PathVariable long id) throws Exception {
+    public Dog showDog(@PathVariable long id) {
         return dogService.getDog(id);
     }
 
-    @RequestMapping(value="/add-dog", method=RequestMethod.POST)
+    @RequestMapping(value="/api/add-dog", method=RequestMethod.POST)
     public Dog addDog(@RequestBody Dog dog) { return dogService.addDog(dog); }
 
-    @PutMapping(value="/update-dog/{id}")
-    public ResponseEntity<Dog> updateDog(@PathVariable(value = "id") long id, @RequestBody Dog country) throws Exception {
-        return dogService.updateDog(id, country);
+    @PutMapping(value="/api/update-dog/{id}")
+    public Dog updateDog(@PathVariable(value = "id") long id, @RequestBody Dog dog) {
+        return dogService.updateDog(id, dog);
     }
 
-    @DeleteMapping(value="/delete-dog/{id}")
-    public boolean deleteDog(@PathVariable int id) throws Exception {
-        return dogService.deleteDog(id);
+    @DeleteMapping(value="/api/delete-dog/{id}")
+    public void deleteDog(@PathVariable int id) {
+        dogService.deleteDog(id);
     }
 }

@@ -1,6 +1,10 @@
 package com.group5.dams.model;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Entity
 @Table(name="pendingAdoption")
@@ -11,6 +15,7 @@ public class PendingAdoption {
     private long userId;
     @Column(unique=true)
     private long dogId;
+    private LocalDateTime dateTime;
 
     public PendingAdoption() { }
 
@@ -42,5 +47,14 @@ public class PendingAdoption {
 
     public void setDogId(long dogId) {
         this.dogId = dogId;
+    }
+
+    public long getPendingAdoptionDateTimestamp() {
+        Instant instant = dateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return instant.toEpochMilli();
+    }
+
+    public void setPendingAdoptionDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

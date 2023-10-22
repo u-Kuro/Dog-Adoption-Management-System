@@ -1,6 +1,11 @@
 package com.group5.dams.model;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 @Entity
@@ -12,16 +17,16 @@ public class Dog {
 
     private String name;
     private String breed;
-    private int age;
+    private long birthTimestamp;
 
     public Dog() {
     }
 
-    public Dog(long id, String name, String breed, int age) {
+    public Dog(long id, String name, String breed, long birthTimestamp) {
         this.id = id;
         this.name = name;
         this.breed = breed;
-        this.age = age;
+        this.birthTimestamp = birthTimestamp;
     }
 
     public long getId() {
@@ -48,11 +53,18 @@ public class Dog {
         this.breed = breed;
     }
 
-    public int getAge() {
-        return age;
+    public long getBirthTimestamp() {
+        return birthTimestamp;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthTimestamp(long birthTimestamp) {
+        this.birthTimestamp = birthTimestamp;
+    }
+
+    public int getAge() {
+        Instant instant = Instant.ofEpochMilli(birthTimestamp);
+        LocalDate birthdate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(birthdate, currentDate).getYears();
     }
 }

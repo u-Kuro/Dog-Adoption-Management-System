@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +39,11 @@ public class DogService {
     }
 
     public Dog addDog(Dog dog) {
-        if(!(dog.getAge()>0)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, " Invalid age: " + dog.getAge());
+        Instant instant = Instant.ofEpochMilli(dog.getBirthTimestamp());
+        LocalDate birthdate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        if(currentDate.isBefore(birthdate)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date of birth: " + dog.getAge());
         }
         if (dog.getName()==null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dog's name is required.");
@@ -49,10 +56,13 @@ public class DogService {
 
     public Dog updateDog(long id, Dog dog) {
         Dog foundDog = getDog(id);
-        if(dog.getAge()>0) {
-            foundDog.setAge(dog.getAge());
+        Instant instant = Instant.ofEpochMilli(dog.getBirthTimestamp());
+        LocalDate birthdate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        if(currentDate.isBefore(birthdate)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date of birth: " + dog.getAge());
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, " Invalid age: " + dog.getAge());
+            foundDog.setBirthTimestamp(dog.getBirthTimestamp());
         }
         if (dog.getName()!=null) {
             foundDog.setName(dog.getName());

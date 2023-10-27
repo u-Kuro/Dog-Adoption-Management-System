@@ -18,7 +18,8 @@ export class AdminComponent {
   dogBirthDay: Date | undefined
   constructor(
     private dogAdoptionService: DogAdoptionService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.dogAdoptionService.GetPeople().subscribe((data: User[]) => {
@@ -64,7 +65,7 @@ export class AdminComponent {
 
   public delete(event: Event, dog: Dog) {
     event.stopPropagation()
-    this.dogAdoptionService.DeleteDog(dog.id).subscribe((data) => {
+    this.dogAdoptionService.DeleteDog(dog.id).subscribe(() => {
       this.dogAdoptionService.GetAllDogs().subscribe((data: Dog[]) => {
         this.dogs = data
         data.forEach((dog: Dog) => {
@@ -79,10 +80,13 @@ export class AdminComponent {
 
   public save(event: Event, dog: Dog) {
     event.stopPropagation()
+    if (!this.putDog.name && !this.putDog.breed && !this.dogBirthDay) {
+      return alert("Please fill one of the fields.")
+    }
     let savedDog: {
       name: String | undefined,
       breed: String | undefined,
-      birthTimestamp: Number | undefined
+      birthTimestamp: number | undefined
     } = {
       name: undefined,
       breed: undefined,
@@ -96,6 +100,9 @@ export class AdminComponent {
     }
     if (this.dogBirthDay) {
       savedDog.birthTimestamp = new Date(this.dogBirthDay).getTime()
+      if (savedDog.birthTimestamp > (new Date()).getTime()) {
+        return alert("Invalid: birthday was set in the future.")
+      }
     }
     this.dogAdoptionService.UpdateDog(dog.id, savedDog).subscribe(() => {
       this.dogAdoptionService.GetAllDogs().subscribe((data: Dog[]) => {
@@ -114,18 +121,21 @@ export class AdminComponent {
     let savedDog: {
       name: String | undefined,
       breed: String | undefined,
-      birthTimestamp: Number | undefined
+      birthTimestamp: number | undefined
     } = {
       name: undefined,
       breed: undefined,
       birthTimestamp: undefined
     };
     if (!(this.putDog.name && this.putDog.breed && this.dogBirthDay)) {
-      return alert("Please fill up all the required fields")
+      return alert("Please fill up all the fields.")
     } else {
       savedDog.name = this.putDog.name
       savedDog.breed = this.putDog.breed
       savedDog.birthTimestamp = new Date(this.dogBirthDay).getTime()
+      if (savedDog.birthTimestamp > (new Date()).getTime()) {
+        return alert("Invalid: birthday was set in the future.")
+      }
     }
     this.dogAdoptionService.AddDog(savedDog).subscribe(() => {
       this.dogAdoptionService.GetAllDogs().subscribe((data: Dog[]) => {

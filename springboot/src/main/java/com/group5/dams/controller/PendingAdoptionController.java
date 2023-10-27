@@ -16,6 +16,9 @@ public class PendingAdoptionController {
     @RequestMapping("/api/pending-adoptions")
     public List<PendingAdoption> showPendingAdoptions(){ return pendingAdoptionService.getPendingAdoptions(); }
 
+    @RequestMapping("/api/user-pending-adoptions/{id}")
+    public List<PendingAdoption> showUserPendingAdoptions(long id){ return pendingAdoptionService.getUserPendingAdoptions(id); }
+
     @RequestMapping(value = "/api/pending-adoption/{id}")
     public PendingAdoption showPendingAdoption(@PathVariable long id) {
         return pendingAdoptionService.getPendingAdoption(id);

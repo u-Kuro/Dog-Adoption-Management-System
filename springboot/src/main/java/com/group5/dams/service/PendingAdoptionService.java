@@ -26,6 +26,15 @@ public class PendingAdoptionService {
         return (List<PendingAdoption>) pendingAdoptionRepository.findAll();
     }
 
+    public List<PendingAdoption> getUserPendingAdoptions(long userId) {
+        Optional<List<PendingAdoption>> userPendingAdoptions = pendingAdoptionRepository.findByUserId(userId);
+        if (userPendingAdoptions.isPresent()) {
+            return userPendingAdoptions.get();
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User pending adoptions are not found.");
+        }
+    }
+
     public PendingAdoption getPendingAdoption(long id) {
         return pendingAdoptionRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pending adoption is not found."));
     }

@@ -11,11 +11,11 @@
 <h2>Add Dog Record</h2>
 <form id="add-dog-form">
     <label for="dog-name">Dog Name:</label>
-    <input type="text" id="dog-name" required>
+    <input [(ngModel)]="putDog.name" type="text" id="dog-name">
     <label for="dog-breed">Breed:</label>
-    <input type="text" id="dog-breed" required>
-    <label for="dog-age">Age:</label>
-    <input type="number" id="dog-age" required>
+    <input [(ngModel)]="putDog.breed" type="text" id="dog-breed">
+    <label for="dog-age">BirthDay:</label>
+    <input [(ngModel)]="dogBirthDay" type="date" id="dog-age">
     <button type="submit">Add Dog</button>
 </form>
 
@@ -27,15 +27,8 @@
     <p>{{dog.breed}}</p>
     <p>{{dog.age}}</p>
     <p>{{dog.status}}</p>
+    <button type="button" (click)="save(dog)">Update</button>
+    <button type="button" (click)="delete(dog)">Delete</button>
 </div>
 
-
-<!-- Delete and Update Dog Record Forms -->
-<h2>Delete/Update Dog Record</h2>
-<form id="delete-update-dog-form">
-    <label for="delete-update-dog-id">Dog ID:</label>
-    <input type="number" id="delete-update-dog-id" required>
-    <button type="button" id="delete-dog">Delete Dog</button>
-    <button type="button" id="update-dog">Update Dog</button>
-</form>
 

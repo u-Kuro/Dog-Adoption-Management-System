@@ -33,7 +33,7 @@ export class DogAdoptionService {
     return this.http.get<Dog>(`${this.APIUrl}/dog/${id}`);
   }
 
-  AddDog(dog: Dog): Observable<object> {
+  AddDog(dog: object): Observable<object> {
     return this.http.post<object>(`${this.APIUrl}/add-dog`, dog);
   }
 

@@ -15,7 +15,7 @@ export class AdminComponent {
   User: User = new User
   pendingAdoption: PendingAdoption[] = []
   putDog: Dog = new Dog
-  dogBirthDay: Date = new Date
+  dogBirthDay: Date | undefined
   constructor(
     private dogAdoptionService: DogAdoptionService,
     private route: ActivatedRoute,) { }
@@ -62,9 +62,9 @@ export class AdminComponent {
 
   }
 
-  public delete(dog: Dog){
-    
-    this.dogAdoptionService.DeleteDog(dog.id).subscribe((data)=> {
+  public delete(event: Event, dog: Dog) {
+    event.stopPropagation()
+    this.dogAdoptionService.DeleteDog(dog.id).subscribe((data) => {
       this.dogAdoptionService.GetAllDogs().subscribe((data: Dog[]) => {
         this.dogs = data
         data.forEach((dog: Dog) => {
@@ -77,26 +77,27 @@ export class AdminComponent {
     })
   }
 
-  public save(dog: Dog){
+  public save(event: Event, dog: Dog) {
+    event.stopPropagation()
     let savedDog: {
-      name: String,
-      breed: String,
-      birthTimestamp: Number
+      name: String | undefined,
+      breed: String | undefined,
+      birthTimestamp: Number | undefined
     } = {
-      name: '',
-      breed: '',
-      birthTimestamp: 0
+      name: undefined,
+      breed: undefined,
+      birthTimestamp: undefined
     };
     if (this.putDog.name) {
-        savedDog.name = this.putDog.name
+      savedDog.name = this.putDog.name
     }
     if (this.putDog.breed) {
-        savedDog.breed = this.putDog.breed
+      savedDog.breed = this.putDog.breed
     }
     if (this.dogBirthDay) {
-        savedDog.birthTimestamp = this.dogBirthDay.getTime()
+      savedDog.birthTimestamp = new Date(this.dogBirthDay).getTime()
     }
-    this.dogAdoptionService.UpdateDog(dog.id,savedDog).subscribe((data)=> {
+    this.dogAdoptionService.UpdateDog(dog.id, savedDog).subscribe(() => {
       this.dogAdoptionService.GetAllDogs().subscribe((data: Dog[]) => {
         this.dogs = data
         data.forEach((dog: Dog) => {
@@ -109,26 +110,24 @@ export class AdminComponent {
     })
   }
 
-  public add(){
+  public add() {
     let savedDog: {
-      name: String,
-      breed: String,
-      birthTimestamp: Number
+      name: String | undefined,
+      breed: String | undefined,
+      birthTimestamp: Number | undefined
     } = {
-      name: '',
-      breed: '',
-      birthTimestamp: 0
+      name: undefined,
+      breed: undefined,
+      birthTimestamp: undefined
     };
-    if (this.putDog.name) {
-        savedDog.name = this.putDog.name
+    if (!(this.putDog.name && this.putDog.breed && this.dogBirthDay)) {
+      return alert("Please fill up all the required fields")
+    } else {
+      savedDog.name = this.putDog.name
+      savedDog.breed = this.putDog.breed
+      savedDog.birthTimestamp = new Date(this.dogBirthDay).getTime()
     }
-    if (this.putDog.breed) {
-        savedDog.breed = this.putDog.breed
-    }
-    if (this.dogBirthDay) {
-        savedDog.birthTimestamp = this.dogBirthDay.getTime()
-    }
-    this.dogAdoptionService.AddDog(savedDog).subscribe((data)=> {
+    this.dogAdoptionService.AddDog(savedDog).subscribe(() => {
       this.dogAdoptionService.GetAllDogs().subscribe((data: Dog[]) => {
         this.dogs = data
         data.forEach((dog: Dog) => {
@@ -141,5 +140,13 @@ export class AdminComponent {
     })
   }
 
-
+  public setDogToUpdate(dog: Dog): void {
+    this.putDog.name = dog.name
+    this.putDog.breed = dog.breed
+    if (dog.birthTimestamp) {
+      this.dogBirthDay = new Date(dog.birthTimestamp)
+    } else {
+      this.dogBirthDay = undefined
+    }
+  }
 }

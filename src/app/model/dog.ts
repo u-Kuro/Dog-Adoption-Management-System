@@ -3,7 +3,7 @@ export class Dog {
     name: string = ''
     breed: string = ''
     birthDate: Date = new Date
-    birthTimestamp: Number = 0
-    age:number = 0
+    birthTimestamp: number = 0
+    age: number = 0
     status: string = ''
 }

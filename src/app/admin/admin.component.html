@@ -9,26 +9,27 @@
 
 <!-- Add Dog Record Form -->
 <h2>Add Dog Record</h2>
-<form id="add-dog-form">
+<div id="add-dog-form">
     <label for="dog-name">Dog Name:</label>
     <input [(ngModel)]="putDog.name" type="text" id="dog-name">
     <label for="dog-breed">Breed:</label>
     <input [(ngModel)]="putDog.breed" type="text" id="dog-breed">
-    <label for="dog-age">BirthDay:</label>
-    <input [(ngModel)]="dogBirthDay" type="date" id="dog-age">
-    <button type="submit">Add Dog</button>
-</form>
+    <label for="dog-birthday">BirthDay:</label>
+    <input [ngModel]="dogBirthDay | date:'yyyy-MM-dd'" (ngModelChange)="dogBirthDay = $event" type="date"
+        id="dog-birthday">
+    <button type="submit" (click)="add()">Add Dog</button>
+</div>
 
 <!-- List of Dog Records -->
 <h2>Dog Records</h2>
 <div *ngFor="let dog of dogs" class="dog-card">
-    <h3>{{dog.name}}</h3>
-    <p>{{dog.id}}</p>
-    <p>{{dog.breed}}</p>
-    <p>{{dog.age}}</p>
-    <p>{{dog.status}}</p>
-    <button type="button" (click)="save(dog)">Update</button>
-    <button type="button" (click)="delete(dog)">Delete</button>
+    <div (click)="setDogToUpdate(dog)">
+        <h3>{{dog.name}}</h3>
+        <p>{{dog.id}}</p>
+        <p>{{dog.breed}}</p>
+        <p>{{dog.age}}</p>
+        <p>{{dog.status}}</p>
+        <button type="button" (click)="save($event, dog)">Update</button>
+        <button type="button" (click)="delete($event, dog)">Delete</button>
+    </div>
 </div>
-
-

@@ -1,7 +1,7 @@
-import {User} from './user'
+import { User } from './user'
 
 export class Admin {
-    id: Number = 0
-    userID: Number = 0
+    id: number = 0
+    userID: number = 0
     user: User = new User
 }

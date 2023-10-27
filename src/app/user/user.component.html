@@ -16,11 +16,11 @@
 
 <section id="dogs">
     <h2>Available Dogs</h2>
-    <div class="dog-card">
-        <h3>Dog 1</h3>
-        <p>Breed: Golden Retriever</p>
-        <p>Age: 2 years</p>
-        <button onclick="adoptDog(1)">Adopt Me</button>
+    <div *ngFor="let dog of availabledogs" class="dog-card">
+        <h3>{{dog.name}}</h3>
+        <p>{{dog.breed}}</p>
+        <p>{{dog.age}}</p>
+        <button>Adopt Me</button>
     </div>
 
     <section id="contact">

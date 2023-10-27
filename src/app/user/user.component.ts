@@ -28,5 +28,12 @@ export class UserComponent {
     this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
     this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
   }
-
+  
+  public adopt(dog:Dog){
+    this.dogAdoptionService.AddPendingAdoption({userId:this.User.id,dogId: dog.id}).subscribe(() => {
+      const id = this.User.id || parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
+      this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
+      this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
+    })
+  }
 }

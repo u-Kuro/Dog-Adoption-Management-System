@@ -6,7 +6,7 @@ import { PendingAdoption } from "./model/pending-adoption";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 
-@Injectable({providedIn:'root'})
+@Injectable({ providedIn: 'root' })
 export class DogAdoptionService {
   APIUrl: string
 
@@ -15,9 +15,9 @@ export class DogAdoptionService {
     this.APIUrl = 'http://localhost:18080/api';
 
   }
-  
+
   //Dog
-  public IsDogAvailable(id: number): Observable<Dog[]>{
+  public IsDogAvailable(id: number): Observable<Dog[]> {
     return this.http.get<Dog[]>(this.APIUrl + '/is-dog-available/' + id.toString());
   }
 
@@ -33,12 +33,12 @@ export class DogAdoptionService {
     return this.http.get<Dog>(`${this.APIUrl}/dog/${id}`);
   }
 
-  AddDog(dog: Dog): Observable<Dog> {
-    return this.http.post<Dog>(`${this.APIUrl}/add-dog`, dog);
+  AddDog(dog: Dog): Observable<object> {
+    return this.http.post<object>(`${this.APIUrl}/add-dog`, dog);
   }
 
-  UpdateDog(id: number, dog: Object): Observable<Dog> {
-    return this.http.put<Dog>(`${this.APIUrl}/update-dog/${id}`, JSON.stringify(dog));
+  UpdateDog(id: number, dog: object): Observable<object> {
+    return this.http.put<object>(`${this.APIUrl}/update-dog/${id}`, dog);
   }
 
   DeleteDog(id: number): Observable<any> {
@@ -54,12 +54,12 @@ export class DogAdoptionService {
     return this.http.get<User>(`${this.APIUrl}/person/${id}`);
   }
 
-  AddPerson(person: object): Observable<User> {
-    return this.http.post<User>(`${this.APIUrl}/add-person`, JSON.stringify(person));
+  AddPerson(person: object): Observable<object> {
+    return this.http.post<object>(`${this.APIUrl}/add-person`, person);
   }
 
-  UpdatePerson(id: number, person: Object): Observable<User> {
-    return this.http.put<User>(`${this.APIUrl}/update-person/${id}`, JSON.stringify(person));
+  UpdatePerson(id: number, person: object): Observable<object> {
+    return this.http.put<object>(`${this.APIUrl}/update-person/${id}`, person);
   }
 
   DeletePerson(id: number): Observable<any> {
@@ -71,8 +71,8 @@ export class DogAdoptionService {
     return this.http.get<boolean>(`${this.APIUrl}/is-admin/${userId}`);
   }
 
-  AddAdmin(adminData: { userId: number }): Observable<any> {
-    return this.http.post<any>(`${this.APIUrl}/add-admin`, JSON.stringify(adminData));
+  AddAdmin(adminData: object): Observable<object> {
+    return this.http.post<object>(`${this.APIUrl}/add-admin`, adminData);
   }
 
   DeleteAdmin(userId: number): Observable<any> {
@@ -88,8 +88,8 @@ export class DogAdoptionService {
     return this.http.get<PendingAdoption>(`${this.APIUrl}/pending-adoption/${id}`);
   }
 
-  AddPendingAdoption(adoption: object): Observable<PendingAdoption> {
-    return this.http.post<PendingAdoption>(`${this.APIUrl}/add-pending-adoption`, JSON.stringify(adoption));
+  AddPendingAdoption(adoption: object): Observable<object> {
+    return this.http.post<object>(`${this.APIUrl}/add-pending-adoption`, adoption);
   }
 
   DeletePendingAdoption(id: number): Observable<any> {

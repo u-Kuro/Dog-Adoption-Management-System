@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../model/user';
+import { Dog } from '../model/dog';
+import { PendingAdoption } from '../model/pending-adoption';
+import { DogAdoptionService } from '../dog-adoption.service';
+
 
 @Component({
   selector: 'app-user',
@@ -6,5 +12,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
+  availabledogs: Dog[] = []
+  User: User = new User
+  UserPendingAdoption: PendingAdoption[] = []
+  constructor(
+    private dogAdoptionService: DogAdoptionService,
+    private route: ActivatedRoute,) {}
+  
+
+  ngOnInit(): void{
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
+    this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => {this.availabledogs = data})
+    this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => {this.UserPendingAdoption = data})
+  }
 
 }

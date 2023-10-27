@@ -37,8 +37,8 @@ export class DogAdoptionService {
     return this.http.post<Dog>(`${this.APIUrl}/add-dog`, dog);
   }
 
-  UpdateDog(id: number, dog: Dog): Observable<Dog> {
-    return this.http.put<Dog>(`${this.APIUrl}/update-dog/${id}`, dog);
+  UpdateDog(id: number, dog: Object): Observable<Dog> {
+    return this.http.put<Dog>(`${this.APIUrl}/update-dog/${id}`, JSON.stringify(dog));
   }
 
   DeleteDog(id: number): Observable<any> {
@@ -54,12 +54,12 @@ export class DogAdoptionService {
     return this.http.get<User>(`${this.APIUrl}/person/${id}`);
   }
 
-  AddPerson(person: User): Observable<User> {
-    return this.http.post<User>(`${this.APIUrl}/add-person`, person);
+  AddPerson(person: object): Observable<User> {
+    return this.http.post<User>(`${this.APIUrl}/add-person`, JSON.stringify(person));
   }
 
-  UpdatePerson(id: number, person: User): Observable<User> {
-    return this.http.put<User>(`${this.APIUrl}/update-person/${id}`, person);
+  UpdatePerson(id: number, person: Object): Observable<User> {
+    return this.http.put<User>(`${this.APIUrl}/update-person/${id}`, JSON.stringify(person));
   }
 
   DeletePerson(id: number): Observable<any> {
@@ -72,7 +72,7 @@ export class DogAdoptionService {
   }
 
   AddAdmin(adminData: { userId: number }): Observable<any> {
-    return this.http.post<any>(`${this.APIUrl}/add-admin`, adminData);
+    return this.http.post<any>(`${this.APIUrl}/add-admin`, JSON.stringify(adminData));
   }
 
   DeleteAdmin(userId: number): Observable<any> {
@@ -88,8 +88,8 @@ export class DogAdoptionService {
     return this.http.get<PendingAdoption>(`${this.APIUrl}/pending-adoption/${id}`);
   }
 
-  AddPendingAdoption(adoption: PendingAdoption): Observable<PendingAdoption> {
-    return this.http.post<PendingAdoption>(`${this.APIUrl}/add-pending-adoption`, adoption);
+  AddPendingAdoption(adoption: object): Observable<PendingAdoption> {
+    return this.http.post<PendingAdoption>(`${this.APIUrl}/add-pending-adoption`, JSON.stringify(adoption));
   }
 
   DeletePendingAdoption(id: number): Observable<any> {

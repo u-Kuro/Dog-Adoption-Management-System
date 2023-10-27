@@ -28,7 +28,7 @@ public class PendingAdoptionService {
 
     public List<PendingAdoption> getUserPendingAdoptions(long userId) {
         Optional<List<PendingAdoption>> userPendingAdoptions = pendingAdoptionRepository.findByUserId(userId);
-        if (userPendingAdoptions.isPresent()) {
+        if (userPendingAdoptions.isEmpty()) {
             return userPendingAdoptions.get();
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User pending adoptions are not found.");

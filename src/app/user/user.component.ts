@@ -25,6 +25,9 @@ export class UserComponent {
       this.User = data[0]
       if (data[0]) {
         this.User = data[0]
+        const id = this.User.id || parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
+        this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
+        this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
       } else {
         this.dogAdoptionService.AddPerson({
           firstName: "dummy",
@@ -37,13 +40,14 @@ export class UserComponent {
             if (data[0]) {
               this.User = data[0]
             }
+            const id = this.User.id || parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
+            this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
+            this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
           })
         })
       }
     })
-    const id = this.User.id || parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
-    this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
-    this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
+    
   }
 
   public adopt(dog: Dog) {

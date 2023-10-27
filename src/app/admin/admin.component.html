@@ -21,9 +21,14 @@
 
 <!-- List of Dog Records -->
 <h2>Dog Records</h2>
-<ul id="dog-list">
-    <!-- Dog records will be displayed here -->
-</ul>
+<div *ngFor="let dog of dogs" class="dog-card">
+    <h3>{{dog.name}}</h3>
+    <p>{{dog.id}}</p>
+    <p>{{dog.breed}}</p>
+    <p>{{dog.age}}</p>
+    <p>{{dog.status}}</p>
+</div>
+
 
 <!-- Delete and Update Dog Record Forms -->
 <h2>Delete/Update Dog Record</h2>

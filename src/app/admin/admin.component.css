@@ -1,3 +1,71 @@
+.fixedTop {
+    height: 40px;
+    width: calc(100% - 16em);
+    padding: 0.5em;
+    padding-left: 15em;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    background-color: hsl(0, 0%, 100%, 1);
+}
+
+.page-title {
+    height: 100%;
+    width: min-content;
+    padding: 0em 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 750;
+}
+
+.user-nav-container {
+    height: 100%;
+    width: min-content;
+    padding: 0em 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 750;
+}
+
+.user-nav {
+    text-decoration: none;
+    color: inherit;
+}
+
+.fixedLeft {
+    height: 100%;
+    width: 13em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: hsl(0, 0%, 100%, 1);
+    padding: 2em 1em;
+}
+
+.logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo {
+    width: 175px;
+}
+
+.main {
+    width: calc(100% - 18em);
+    margin-left: 15em;
+    margin-top: 50px;
+    padding: 0.5em 1.5em;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;

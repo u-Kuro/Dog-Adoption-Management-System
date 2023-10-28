@@ -67,7 +67,8 @@
                 <td>{{pendingAdoption?.dog?.name || ""}}</td>
                 <td>{{pendingAdoption?.dog?.breed || ""}}</td>
                 <td>{{pendingAdoption?.user?.fullName || ""}}</td>
-                <td>{{pendingAdoption?.user?.email || ""}}</td>
+                <td><a href="{{'mailto:'+(pendingAdoption?.user?.email||'')}}">{{pendingAdoption?.user?.email ||
+                        ""}}</a></td>
                 <td class="action-buttons">
                     <button type="button" (click)="approveAdoption(pendingAdoption)">Approve</button>
                     <button type="button" (click)="rejectAdoption(pendingAdoption)">Reject</button>

@@ -12,22 +12,22 @@ import { DogAdoptionService } from '../dog-adoption.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-  availabledogs: Dog[] = []
-  User: User = new User
-  UserPendingAdoption: PendingAdoption[] = []
+  availableDogs: Dog[] = []
+  user: User = new User
+  userPendingAdoptions: PendingAdoption[] = []
+
   constructor(
     private dogAdoptionService: DogAdoptionService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute
+  ) { }
 
 
   ngOnInit(): void {
     this.dogAdoptionService.GetPeople().subscribe((data: User[]) => {
-      this.User = data[0]
+      this.user = data[0]
       if (data[0]) {
-        this.User = data[0]
-        const id = this.User.id || parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
-        this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
-        this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
+        this.user = data[0]
+        this.refreshData()
       } else {
         this.dogAdoptionService.AddPerson({
           firstName: "dummy",
@@ -36,25 +36,25 @@ export class UserComponent {
           password: ""
         }).subscribe(() => {
           this.dogAdoptionService.GetPeople().subscribe((data: User[]) => {
-            this.User = data[0]
             if (data[0]) {
-              this.User = data[0]
+              this.user = data[0]
             }
-            const id = this.User.id || parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
-            this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
-            this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
+            this.refreshData()
           })
         })
       }
     })
-    
+  }
+
+  public refreshData() {
+    const id = this.user.id || 1;
+    this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availableDogs = data })
+    this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.userPendingAdoptions = data })
   }
 
   public adopt(dog: Dog) {
-    this.dogAdoptionService.AddPendingAdoption({ userId: this.User.id, dogId: dog.id }).subscribe(() => {
-      const id = this.User.id || parseInt(this.route.snapshot.paramMap.get('id')!) || 1;
-      this.dogAdoptionService.GetAvailableDogs().subscribe((data: Dog[]) => { this.availabledogs = data })
-      this.dogAdoptionService.GetUserPendingAdoptions(id).subscribe((data: PendingAdoption[]) => { this.UserPendingAdoption = data })
+    this.dogAdoptionService.AddPendingAdoption({ userId: this.user.id, dogId: dog.id }).subscribe(() => {
+      this.refreshData()
     })
   }
 }

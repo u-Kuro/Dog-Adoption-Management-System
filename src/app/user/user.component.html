@@ -1,49 +1,54 @@
-<header>
-    <h1>Dog Adoption Management System</h1>
-</header>
+<div class="fixedTop">
+    <div class="page-title">User</div>
+    <button class="user-nav-container"><a class="user-nav" href="/admin">Admin</a></button>
+</div>
+<div class="fixedLeft">
+    <div class="logo-container">
+        <img class="logo" src="assets/logo.png">
+    </div>
+</div>
 
-<nav>
-    <a routerLink="/admin">Admin</a>
-</nav>
+<div class="main">
 
-<section id="home">
-    <h2>Welcome to our Dog Adoption System</h2>
-    <p>Find your perfect furry companion!</p>
-</section>
+    <section id="home">
+        <h2>Welcome to our Dog Adoption System</h2>
+        <p>Find your perfect furry companion!</p>
+    </section>
 
-<h2>Available Dogs</h2>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Breed</th>
-            <th>Age</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let dog of availableDogs" class="dog-card">
-            <td>{{dog.id}}</td>
-            <td>{{dog.name}}</td>
-            <td>{{dog.breed}}</td>
-            <td>{{dog.age}}</td>
-            <td class="action-buttons">
-                <button type="button" title="adopt" (click)="adopt(dog)">Adopt Me</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <h2>Available Dogs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dog of availableDogs" class="dog-card">
+                <td>{{dog.id}}</td>
+                <td>{{dog.name}}</td>
+                <td>{{dog.breed}}</td>
+                <td>{{dog.age}}</td>
+                <td class="action-buttons">
+                    <button type="button" title="adopt" (click)="adopt(dog)">Adopt Me</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-<section id="contact">
-    <h2>Contact Us</h2>
-    <p>If you have any questions or need assistance, please contact us at:</p>
-    <address>
-        Email: <a href="mailto:info@dogadoption.com">info@dogadoption.com</a><br>
-        Phone: +1 (555) 555-5555
-    </address>
-</section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need assistance, please contact us at:</p>
+        <address>
+            Email: <a href="mailto:info@dogadoption.com">info@dogadoption.com</a><br>
+            Phone: +1 (555) 555-5555
+        </address>
+    </section>
 
-<footer>
-    <p>&copy; 2023 Dog Adoption Management System</p>
-</footer>
+    <footer>
+        <p>&copy; 2023 Dog Adoption Management System</p>
+    </footer>
+</div>

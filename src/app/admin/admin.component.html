@@ -4,9 +4,7 @@
 <h1>Admin</h1>
 
 <nav>
-    <ul>
-        <li><a href="/user">Back</a></li>
-    </ul>
+    <a href="/user">User</a>
 </nav>
 
 <h2>Add Dog Record</h2>
@@ -25,8 +23,8 @@
 <table>
     <thead>
         <tr>
-            <th>Dog Name</th>
             <th>ID</th>
+            <th>Dog Name</th>
             <th>Breed</th>
             <th>Age</th>
             <th>Status</th>
@@ -35,8 +33,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let dog of dogs" (click)="setDogToUpdate(dog)" class="dog-card">
-            <td>{{dog.name}}</td>
             <td>{{dog.id}}</td>
+            <td>{{dog.name}}</td>
             <td>{{dog.breed}}</td>
             <td>{{dog.age}}</td>
             <td>{{dog.status}}</td>

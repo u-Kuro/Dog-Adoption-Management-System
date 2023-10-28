@@ -1,74 +1,78 @@
-<div class="fixedTop"></div>
-<div class="fixedLeft"></div>
-
-<h1>Admin</h1>
-
-<nav>
-    <a href="/user">User</a>
-</nav>
-
-<h2>Add Dog Record</h2>
-<div id="add-dog-form">
-    <label for="dog-name">Dog Name:</label>
-    <input [(ngModel)]="inputDog.name" type="text" id="dog-name">
-    <label for="dog-breed">Breed:</label>
-    <input [(ngModel)]="inputDog.breed" type="text" id="dog-breed">
-    <label for="dog-birthday">Birthday:</label>
-    <input [ngModel]="inputDogBirthDay | date:'yyyy-MM-dd'" (ngModelChange)="inputDogBirthDay = $event" type="date"
-        id="dog-birthday">
-    <button type="submit" (click)="addDog()">Add Dog</button>
+<div class="fixedTop">
+    <div class="page-title">Admin</div>
+    <button class="user-nav-container"><a class="user-nav" href="/user">User</a></button>
+</div>
+<div class="fixedLeft">
+    <div class="logo-container">
+        <img class="logo" src="assets/logo.png">
+    </div>
 </div>
 
-<h2>Dog Records</h2>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Dog Name</th>
-            <th>Breed</th>
-            <th>Age</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let dog of dogs" (click)="setDogToUpdate(dog)" class="dog-card">
-            <td>{{dog.id}}</td>
-            <td>{{dog.name}}</td>
-            <td>{{dog.breed}}</td>
-            <td>{{dog.age}}</td>
-            <td>{{dog.status}}</td>
-            <td class="action-buttons">
-                <button type="button" (click)="saveDog($event, dog)">Update</button>
-                <button type="button" (click)="deleteDog($event, dog)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="main">
 
-<h2>Pending Adoptions</h2>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Dog Name</th>
-            <th>Dog Breed</th>
-            <th>User Name</th>
-            <th>User Email</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let pendingAdoption of pendingAdoptions" class="pending-adoption-card">
-            <td>{{pendingAdoption.id}}</td>
-            <td>{{pendingAdoption?.dog?.name || ""}}</td>
-            <td>{{pendingAdoption?.dog?.breed || ""}}</td>
-            <td>{{pendingAdoption?.user?.fullName || ""}}</td>
-            <td>{{pendingAdoption?.user?.email || ""}}</td>
-            <td class="action-buttons">
-                <button type="button" (click)="approveAdoption(pendingAdoption)">Approve</button>
-                <button type="button" (click)="rejectAdoption(pendingAdoption)">Reject</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <h2>Add Dog Record</h2>
+    <div id="add-dog-form">
+        <label for="dog-name">Dog Name:</label>
+        <input [(ngModel)]="inputDog.name" type="text" id="dog-name">
+        <label for="dog-breed">Breed:</label>
+        <input [(ngModel)]="inputDog.breed" type="text" id="dog-breed">
+        <label for="dog-birthday">Birthday:</label>
+        <input [ngModel]="inputDogBirthDay | date:'yyyy-MM-dd'" (ngModelChange)="inputDogBirthDay = $event" type="date"
+            id="dog-birthday">
+        <button type="submit" (click)="addDog()">Add Dog</button>
+    </div>
+
+    <h2>Dog Records</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Dog Name</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dog of dogs" (click)="setDogToUpdate(dog)" class="dog-card">
+                <td>{{dog.id}}</td>
+                <td>{{dog.name}}</td>
+                <td>{{dog.breed}}</td>
+                <td>{{dog.age}}</td>
+                <td>{{dog.status}}</td>
+                <td class="action-buttons">
+                    <button type="button" (click)="saveDog($event, dog)">Update</button>
+                    <button type="button" (click)="deleteDog($event, dog)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Pending Adoptions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Dog Name</th>
+                <th>Dog Breed</th>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pendingAdoption of pendingAdoptions" class="pending-adoption-card">
+                <td>{{pendingAdoption.id}}</td>
+                <td>{{pendingAdoption?.dog?.name || ""}}</td>
+                <td>{{pendingAdoption?.dog?.breed || ""}}</td>
+                <td>{{pendingAdoption?.user?.fullName || ""}}</td>
+                <td>{{pendingAdoption?.user?.email || ""}}</td>
+                <td class="action-buttons">
+                    <button type="button" (click)="approveAdoption(pendingAdoption)">Approve</button>
+                    <button type="button" (click)="rejectAdoption(pendingAdoption)">Reject</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
